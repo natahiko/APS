@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull;
 
 
 @Entity
-public class UserModel {
+public class User {
 
     @Id
     @NotNull
@@ -13,7 +13,7 @@ public class UserModel {
     @NotNull
     private String password;
 
-    public UserModel() {
+    public User() {
     }
 
     public String getUsername() {

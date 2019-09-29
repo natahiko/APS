@@ -1,4 +1,16 @@
 package randomer.dao;
 
-public class RequestRepository {
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
+import randomer.model.Request;
+
+import java.util.List;
+
+@Repository
+public interface RequestRepository extends CrudRepository<Request, Integer> {
+
+    Request save (Request request);
+
+    List getAllByUsername(String username);
+
 }
