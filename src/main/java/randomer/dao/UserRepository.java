@@ -1,10 +1,12 @@
 package randomer.dao;
 
+import jdk.internal.jline.internal.Nullable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import randomer.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends CrudRepository<User, String> {
@@ -12,5 +14,5 @@ public interface UserRepository extends CrudRepository<User, String> {
 
     User save(User user);
 
-    User getUserByUsername(String username);
+    Optional<User> getUserByUsername(String username);
 }
