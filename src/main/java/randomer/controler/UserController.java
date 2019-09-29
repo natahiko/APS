@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import randomer.model.User;
 import randomer.service.UserService;
 
+import javax.servlet.http.HttpServletResponse;
 import java.util.Optional;
 
 @RestController
@@ -29,14 +30,19 @@ public class UserController {
         return new MyError("ok");
     }
     @PostMapping("/login")
-    public MyError login (@RequestBody String jsonUser) throws JSONException {
+    public MyError login (@RequestBody String jsonUser, HttpServletResponse response) throws JSONException {
         JSONObject json = new JSONObject(new JSONTokener(jsonUser));
         Optional<User> optionalUser = userService.getUserByUsername(json.getString("username"));
-        if (!optionalUser.isPresent())
+        if (!optionalUser.isPresent()) {
+            response.setStatus(418);
             return new MyError("no user registered under this usename");
+        }
         User user = optionalUser.get();
-        if (!user.getPassword().equals(json.getString("password")))
+        if (!user.getPassword().equals(json.getString("password"))) {
+            response.setStatus(418);
             return new MyError("your password is incorrect");
+        }
+        response.setStatus(200);
         return new MyError("ok");
     }
 
