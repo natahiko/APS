@@ -11,6 +11,6 @@ public interface RequestRepository extends CrudRepository<Request, Integer> {
 
     Request save (Request request);
 
-    List getAllByUsername(String username);
+    List<Request> getAllByUsername(String username);
 
 }

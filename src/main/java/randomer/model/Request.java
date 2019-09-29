@@ -23,6 +23,12 @@ public class Request {
     public Request() {
     }
 
+    public Request(@NotNull int start, @NotNull int end, @NotNull String username) {
+        this.start = start;
+        this.end = end;
+        this.username = username;
+    }
+
     public int getId() {
         return id;
     }

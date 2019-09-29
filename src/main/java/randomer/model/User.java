@@ -16,6 +16,11 @@ public class User {
     public User() {
     }
 
+    public User(@NotNull String username, @NotNull String password) {
+        this.username = username;
+        this.password = password;
+    }
+
     public String getUsername() {
         return username;
     }
