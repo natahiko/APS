@@ -1,6 +1,5 @@
 package randomer.dao;
 
-import jdk.internal.jline.internal.Nullable;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import randomer.model.User;
