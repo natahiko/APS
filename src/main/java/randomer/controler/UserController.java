@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -29,8 +30,11 @@ public class UserController {
         System.out.println(user);
         return new MyError("ok");
     }
+
+    @CrossOrigin(origins = "http://localhost:63343")
     @PostMapping("/login")
     public MyError login (@RequestBody String jsonUser, HttpServletResponse response) throws JSONException {
+     System.out.println(jsonUser);
         JSONObject json = new JSONObject(new JSONTokener(jsonUser));
         Optional<User> optionalUser = userService.getUserByUsername(json.getString("username"));
         if (!optionalUser.isPresent()) {
