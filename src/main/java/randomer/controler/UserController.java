@@ -24,6 +24,7 @@ public class UserController {
         this.userService = userService;
     }
 
+    @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/register")
     public MyError register (@RequestBody User user){
         userService.save(user);
@@ -31,10 +32,10 @@ public class UserController {
         return new MyError("ok");
     }
 
-    @CrossOrigin(origins = "http://localhost:63343")
+    @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/login")
     public MyError login (@RequestBody String jsonUser, HttpServletResponse response) throws JSONException {
-     System.out.println(jsonUser);
+        System.out.println(jsonUser);
         JSONObject json = new JSONObject(new JSONTokener(jsonUser));
         Optional<User> optionalUser = userService.getUserByUsername(json.getString("username"));
         if (!optionalUser.isPresent()) {
