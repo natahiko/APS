@@ -26,9 +26,20 @@ public class UserController {
 
     @CrossOrigin(origins = "http://localhost:63342")
     @PostMapping("/register")
-    public MyError register (@RequestBody User user){
+    public MyError register (@RequestBody User user, HttpServletResponse response){
+        Optional<User> optional = userService.getUserByUsername(user.getUsername());
+        if (optional.isPresent()){
+            response.setStatus(418);
+            return new MyError("This username is already taken");
+        }
+        optional = userService.getUserByEmail(user.getEmail());
+        if (optional.isPresent()){
+            response.setStatus(418);
+            return new MyError("This email is already taken");
+        }
+
         userService.save(user);
-        System.out.println(user);
+        response.setStatus(200);
         return new MyError("ok");
     }
 

@@ -19,7 +19,6 @@ public class User {
     @NotNull
     private String surname;
     @NotNull
-    @Email
     private String email;
 
     public User() {
