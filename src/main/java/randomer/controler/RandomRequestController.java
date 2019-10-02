@@ -3,10 +3,13 @@ package randomer.controler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import randomer.functionality.Randomizer;
+import randomer.model.ProxyRequest;
+import randomer.model.ProxyUser;
 import randomer.model.Request;
 import randomer.service.RequestService;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 @RestController
 public class RandomRequestController {
@@ -24,4 +27,13 @@ public class RandomRequestController {
         return (new Randomizer()).generate(start, end);
     }
 
+    @CrossOrigin(origins = "http://localhost:63343")
+    @GetMapping("/getAllRequests")
+    public ArrayList<ProxyRequest> getAll(@RequestParam(name="username") String username){
+        return new ArrayList<>(requestService
+                .getAllByUsername(username)
+                .stream()
+                .map(ProxyRequest::new)
+                .collect(Collectors.toList()));
+    }
 }
