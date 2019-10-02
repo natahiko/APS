@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 import randomer.dao.UserRepository;
 import randomer.model.User;
 
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Optional;
 
 @Service
@@ -17,7 +17,7 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> findAll() {
+    public ArrayList<User> findAll() {
         return userRepository.findAll();
     }
 

@@ -17,7 +17,7 @@ public class RandomRequestController {
         this.requestService = requestService;
     }
 
-    @CrossOrigin(origins = "http://localhost:63342")
+    @CrossOrigin(origins = "http://localhost:63343")
     @PostMapping("/random")
     public ArrayList<Integer> getRandom(@RequestParam(name = "username") String username, @RequestParam(name = "start", required = true) int start, @RequestParam(name = "end", required = true) int end) {
         requestService.save(new Request(start, end, username));
