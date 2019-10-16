@@ -13,6 +13,8 @@ public class Randomizer {
     public ArrayList<Integer> generate(int start, int end) {
         ArrayList<Integer> randomList = (ArrayList<Integer>) IntStream.range(start, end + 1).boxed().collect(Collectors.toList());
         Collections.shuffle(randomList);
+        System.out.println("done random succesfully "+start+" "+end);
+        System.out.println(randomList.toString());
         return randomList;
     }
 }

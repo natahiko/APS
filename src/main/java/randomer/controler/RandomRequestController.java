@@ -20,14 +20,15 @@ public class RandomRequestController {
         this.requestService = requestService;
     }
 
-    @CrossOrigin(origins = "http://localhost:63343")
+    @CrossOrigin(origins = "http://localhost:8081")
     @PostMapping("/random")
-    public ArrayList<Integer> getRandom(@RequestParam(name = "username") String username, @RequestParam(name = "start", required = true) int start, @RequestParam(name = "end", required = true) int end) {
+    public String getRandom(@RequestParam(name = "username") String username, @RequestParam(name = "start", required = true) int start, @RequestParam(name = "end", required = true) int end) {
         requestService.save(new Request(start, end, username));
-        return (new Randomizer()).generate(start, end);
+        String ret = (new Randomizer()).generate(start, end).toString();
+        return new StringBuffer(ret).deleteCharAt(ret.length()-1).deleteCharAt(0).toString();
     }
 
-    @CrossOrigin(origins = "http://localhost:63343")
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping("/getAllRequests")
     public ArrayList<ProxyRequest> getAll(@RequestParam(name="username") String username){
         return new ArrayList<>(requestService
