@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import randomer.functionality.EncryptionUtil;
 import randomer.model.ProxyUser;
 import randomer.model.User;
 import randomer.service.UserService;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     UserService userService;
+    EncryptionUtil cipher = new EncryptionUtil();
 
     @Autowired
     public UserController(UserService userService) {
@@ -37,7 +39,7 @@ public class UserController {
             response.setStatus(418);
             return new MyError("This email is already taken");
         }
-
+        user.setPassword(cipher.encrypt(user.getPassword()));
         userService.save(user);
         response.setStatus(200);
         return new MyError("ok");
@@ -55,7 +57,7 @@ public class UserController {
             return new MyError("no user registered under this usename");
         }
         User user = optionalUser.get();
-        if (!user.getPassword().equals(json.getString("password"))) {
+        if (!cipher.decrypt(user.getPassword()).equals(json.getString("password"))) {
             response.setStatus(418);
             System.out.println("password");
             return new MyError("your password is incorrect");

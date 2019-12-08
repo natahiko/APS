@@ -16,88 +16,19 @@ import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 
 public class EncryptionUtil {
-    private final int keySize = 128;
-    private final int iterationCount = 1000;
-    private final Cipher cipher;
+   public String encrypt(String text){
+       StringBuilder builder = new StringBuilder();
+       for (int i = 0; i < text.length(); i++) {
+           builder.append((char)(text.charAt(i)+10));
 
-    private String passphrase = "Abcdefghijklmnop";
-    private String salt = "dc0da04af8fee58593442bf834b30739";
-    private String iv = "dc0da04af8fee58593442bf834b30739";
-
-    public EncryptionUtil(){
-        try {
-            cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
-        }
-        catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
-            throw fail(e);
-        }
-    }
-
-    public String decrypt(String ciphertext) {
-        try {
-            SecretKey key = generateKey(salt, passphrase);
-            byte[] decrypted = doFinal(Cipher.DECRYPT_MODE, key, iv, base64(ciphertext));
-            return new String(decrypted, "UTF-8");
-        }
-        catch (UnsupportedEncodingException e) {
-            return null;
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    public String encrypt(String text){
-        try {
-            SecretKey key = generateKey(salt, passphrase);
-            byte[] decrypted = doFinal(Cipher.ENCRYPT_MODE, key, iv, base64(text));
-            return new String(decrypted, "UTF-8");
-        }
-        catch (UnsupportedEncodingException e) {
-            return null;
-        }catch (Exception e){
-            return null;
-        }
-    }
-
-    private byte[] doFinal(int encryptMode, SecretKey key, String iv, byte[] bytes) {
-        try {
-            cipher.init(encryptMode, key, new IvParameterSpec(hex(iv)));
-            return cipher.doFinal(bytes);
-        }
-        catch (InvalidKeyException
-                | InvalidAlgorithmParameterException
-                | IllegalBlockSizeException
-                | BadPaddingException e) {
-            return null;
-        }
-    }
-
-    private SecretKey generateKey(String salt, String passphrase) {
-        try {
-            SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
-            KeySpec spec = new PBEKeySpec(passphrase.toCharArray(), hex(salt), iterationCount, keySize);
-            SecretKey key = new SecretKeySpec(factory.generateSecret(spec).getEncoded(), "AES");
-            return key;
-        }
-        catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
-            return null;
-        }
-    }
-
-    public static byte[] base64(String str) {
-        return Base64.decodeBase64(str);
-    }
-
-    public static byte[] hex(String str) {
-        try {
-            return Hex.decodeHex(str.toCharArray());
-        }
-        catch (DecoderException e) {
-            throw new IllegalStateException(e);
-        }
-    }
-
-    private IllegalStateException fail(Exception e) {
-        return null;
-    }
+       }
+       return builder.toString();
+   }
+   public String decrypt(String text){
+       StringBuilder builder = new StringBuilder();
+       for (int i = 0; i < text.length(); i++) {
+           builder.append((char)(text.charAt(i)-10));
+       }
+       return builder.toString();
+   }
 }
