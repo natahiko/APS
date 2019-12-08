@@ -17,11 +17,11 @@ public class RequestService {
     }
 
 
-    public Request save(Request user) {
-        return requestRepository.save(user);
+    public Request save(Request request) {
+        return requestRepository.save(request);
     }
 
-    public List<Request> getAllByUsername(String username) {
-        return requestRepository.getAllByUsername(username);
+    public List<Request> getAllByUser(int user) {
+        return requestRepository.getAllByUser(user);
     }
 }

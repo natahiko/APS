@@ -11,6 +11,8 @@ public class User {
 
     @Id
     @NotNull
+    private int id;
+    @NotNull
     private String username;
     @NotNull
     private String password;
@@ -70,6 +72,14 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -18,15 +18,15 @@ public class Request {
     private int end;
 
     @NotNull
-    private String username;
+    private int user;
 
     public Request() {
     }
 
-    public Request(@NotNull int start, @NotNull int end, @NotNull String username) {
+    public Request(@NotNull int start, @NotNull int end, @NotNull int user) {
         this.start = start;
         this.end = end;
-        this.username = username;
+        this.user = user;
     }
 
     public int getId() {
@@ -53,11 +53,11 @@ public class Request {
         this.end = end;
     }
 
-    public String getUsername() {
-        return username;
+    public int getUser() {
+        return user;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUser(int user) {
+        this.user = user;
     }
 }
