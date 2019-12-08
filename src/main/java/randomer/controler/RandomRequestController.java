@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import randomer.functionality.Randomizer;
 import randomer.model.ProxyRequest;
-import randomer.model.ProxyUser;
 import randomer.model.Request;
 import randomer.model.User;
 import randomer.service.RequestService;

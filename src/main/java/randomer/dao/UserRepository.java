@@ -4,7 +4,6 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 import randomer.model.User;
 
-
 import java.util.ArrayList;
 import java.util.Optional;
 
